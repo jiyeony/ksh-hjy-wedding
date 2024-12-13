@@ -131,27 +131,34 @@
         // const content = await document.querySelector("#guest-content").value;
 
       var bnb = document.getElementsByName('bnbs');
-      var bnbChoice = 'broom'; // 여기에 선택된 radio 버튼의 값이 담기게 된다.
+      var bnbChoice = ''; // 여기에 선택된 radio 버튼의 값이 담기게 된다.
         for(var i=0; i<bnb.length; i++) {
             if(bnb[i].checked) {
                 bnbChoice = bnb[i].value;
             }
         }
+        if(name == "") {
+            alert("성함을 작성해 주세요 👀");
+        } else if(bnbChoice == "") {
+            alert("신랑 측 또는 신부 측을 선택해 주세요 👀");
+        } else if(number==null){
+            alert("참석 인원을 작성해 주세요 👀");
+        } else {
         alert(name + " 님 작성 되었습니다. 감사합니다. 💕");
         // Firestore에 데이터 전송
-        await addDoc(testRef, {
-          name: name,
-          bnb: bnbChoice,
-          number: number,
-          created_at: new Date(),
-        });
+            await addDoc(testRef, {
+            name: name,
+            bnb: bnbChoice,
+            number: number,
+            created_at: new Date(),
+            });
 
-        // 입력란 초기화
-        document.querySelector("#guest-name").value = "";
-        document.querySelector("#select").value = "";
-        document.querySelector("#number").value = "";
-        //document.querySelector("#guest-content").value = "";
-
+            // 입력란 초기화
+            document.querySelector("#guest-name").value = "";
+            document.querySelector("#select").value = "";
+            document.querySelector("#number").value = "";
+            //document.querySelector("#guest-content").value = "";
+        }
       }
 
       // 방명록 전체 목록 표시 기능
